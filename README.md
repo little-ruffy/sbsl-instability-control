@@ -1,7 +1,8 @@
 # Active Closed-Loop Suppression of Hydrodynamic & Plasma Instabilities
 
 **Author:** Timur Shakurov ([shakurtimur@gmail.com](mailto:shakurtimur@gmail.com))  
-**Status:** Research & Benchmark Preview *(Full differentiable JAX codebase, and policy checkpoints are held in a private repository prior to provisional patent filing; full 15-page manuscript attached to fellowship application / available upon request).*
+**Status:** Research & Benchmark Preview
+**Repository Contents:** This public repository contains the core differentiable physics modules (`core/gilmore.py`, `core/keller_miksis.py`, `core/plasma_core.py`, `core/interior.py`) and the Navier–Stokes CFD cross-validation scripts (`scripts/`). The closed-loop RL control environments (`envs/`), piezo-actuator lag models, and trained policy weights are held in a private repository pending provisional patent filing (full 15-page manuscript attached to the fellowship application / available upon request).
 
 ---
 
