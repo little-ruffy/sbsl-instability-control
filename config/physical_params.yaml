@@ -1,0 +1,534 @@
+# Physical parameters, liquid/gas EOS constants, and scenario definitions (SI units)
+schema_version: 1
+meta:
+  name: default
+  description: Physical constants, EOS parameters, and SBSL/sonofusion scenarios (SI).
+  scenario: sbsl_argon_water
+guards:
+  r_min_abs: 1.0e-10
+  r_min_rel_to_hardcore: 1.02
+  t_min: 1.0
+  t_max: 10000000000.0
+  rdot_max_mach: 50.0
+  km_denominator_floor: 1.0e-12
+  softmin_sharpness: 8.0
+  eps_div: 1.0e-30
+liquids:
+  water_20C:
+    name: water (H2O), 20 degC
+    density: 998.21
+    sound_speed: 1482.3
+    surface_tension: 0.07275
+    dynamic_viscosity: 0.0010016
+    ambient_pressure: 101325.0
+    ambient_temperature: 293.15
+    vapour_pressure: 2339.0
+    tait_B: 304900000.0
+    tait_n: 7.15
+    thermal_conductivity: 0.5984
+    specific_heat_cp: 4181.8
+  galinstan_20C:
+    name: Galinstan (Ga 68.5 / In 21.5 / Sn 10 wt%), 20 degC
+    density: 6440.0
+    sound_speed: 2740.0
+    surface_tension: 0.718
+    dynamic_viscosity: 0.0024
+    ambient_pressure: 101325.0
+    ambient_temperature: 293.15
+    vapour_pressure: 1.0e-08
+    tait_B: 483400000.0
+    tait_n: 4.5
+    thermal_conductivity: 16.5
+    specific_heat_cp: 296.0
+  acetone_d6_0C:
+    name: deuterated acetone (C3D6O), 0 degC
+    density: 845.0
+    sound_speed: 1250.0
+    surface_tension: 0.0263
+    dynamic_viscosity: 0.00046
+    ambient_pressure: 101325.0
+    ambient_temperature: 273.15
+    vapour_pressure: 9300.0
+    tait_B: 100000000.0
+    tait_n: 9.0
+    thermal_conductivity: 0.18
+    specific_heat_cp: 2050.0
+gas_species:
+  argon:
+    name: argon
+    n_atoms_per_molecule: 1
+    provides_deuterons: false
+    molar_mass_atomic: 0.039948
+    vdw_b: 3.219e-05
+    ionisation_potentials_eV:
+    - 15.7596
+    - 27.62967
+    - 40.735
+    - 59.58
+    - 74.84
+    - 91.29
+    - 124.41
+    - 143.4567
+    - 422.6
+    - 479.76
+    - 540.4
+    - 619.0
+    - 685.5
+    - 755.13
+    - 855.5
+    - 918.375
+    - 4120.6657
+    - 4426.2229
+    max_ionisation_stages: null
+    degeneracy_ratio: 1.0
+    dissociation_g_ratio: 1.0
+    dissociation_energy_eV: 0.0
+    theta_rot_K: 0.0
+    theta_vib_K: 0.0
+    kappa_ref: 0.01772
+    kappa_T_ref: 300.0
+    kappa_exponent: 0.73
+  deuterium:
+    name: deuterium (D2)
+    n_atoms_per_molecule: 2
+    provides_deuterons: true
+    molar_mass_atomic: 0.0020141018
+    vdw_b: 2.661e-05
+    ionisation_potentials_eV:
+    - 13.602
+    max_ionisation_stages: null
+    degeneracy_ratio: 1.0
+    dissociation_g_ratio: 4.0
+    dissociation_energy_eV: 4.5563
+    theta_rot_K: 43.8
+    theta_vib_K: 4482.0
+    kappa_ref: 0.128
+    kappa_T_ref: 300.0
+    kappa_exponent: 0.75
+  water_vapour:
+    name: water vapour (H2O)
+    n_atoms_per_molecule: 1
+    provides_deuterons: false
+    molar_mass_atomic: 0.01801528
+    vdw_b: 3.049e-05
+    ionisation_potentials_eV:
+    - 12.621
+    max_ionisation_stages: 1
+    degeneracy_ratio: 1.0
+    dissociation_g_ratio: 1.0
+    dissociation_energy_eV: 0.0
+    theta_rot_K: 0.0
+    theta_vib_K: 0.0
+    free_rotational_dof: 3
+    free_theta_rot_K: 22.4
+    free_theta_vib_K:
+    - 2295.0
+    - 5261.0
+    - 5404.0
+    free_binding_energy_eV: 9.511
+    kappa_ref: 0.0196
+    kappa_T_ref: 373.0
+    kappa_exponent: 1.35
+  helium:
+    name: helium
+    n_atoms_per_molecule: 1
+    provides_deuterons: false
+    molar_mass_atomic: 0.004002602
+    vdw_b: 2.37e-05
+    ionisation_potentials_eV:
+    - 24.5874
+    - 54.4178
+    max_ionisation_stages: null
+    degeneracy_ratio: 1.0
+    dissociation_g_ratio: 1.0
+    dissociation_energy_eV: 0.0
+    theta_rot_K: 0.0
+    theta_vib_K: 0.0
+    kappa_ref: 0.1513
+    kappa_T_ref: 300.0
+    kappa_exponent: 0.71
+transport:
+  conduction_enabled: true
+  conduction_model: blended_spitzer
+  boundary_layer_model: toegel
+  boundary_layer_cap_factor: 3.14159265358979
+  coulomb_log_min: 2.0
+  coulomb_log_max: 25.0
+  saha_bisection_iters: 10
+  saha_newton_iters: 5
+  flux_limiter_enabled: true
+  flux_limiter_factor: 0.1
+  bremsstrahlung_enabled: true
+  bremsstrahlung_gaunt: 1.0
+  blackbody_cap_enabled: true
+  blackbody_emissivity: 1.0
+  dissociation_enabled: true
+  ionisation_enabled: true
+  vibrational_dof_enabled: true
+fusion:
+  enabled: true
+  reactions:
+  - DD_n3He
+  - DD_pT
+  charged_product_deposition_fraction: 0.0
+  t_valid_min_keV: 0.2
+  t_valid_max_keV: 190.0
+  theta_denominator_floor: 0.001
+shape:
+  enabled: true
+  mode_l: 2
+  viscous_damping_enabled: true
+  damping_coeff_c1: 1.0
+  damping_coeff_c2: 1.0
+  a_l_init_rel: 0.001
+  adot_l_init: 0.0
+  instability_threshold: 0.8
+acoustics:
+  frequency: 26500.0
+  n_harmonics: 4
+  amplitudes_in_atm: true
+  amplitudes_init:
+  - 1.35
+  - 0.0
+  - 0.0
+  - 0.0
+  phases_init:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  ramp_cycles: 0.0
+vapour:
+  enabled: false
+  species: water_vapour
+  diffusivity_ref: 2.4e-05
+  density_ref: 2.464e25
+scenarios:
+  sbsl_argon_water:
+    description: Canonical SBSL operating point (argon in water, 26.5 kHz, 1.35 atm, R0 = 4.5 um).
+    liquid: water_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 4.5e-06
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 1.35
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+  sonofusion_d_acetone:
+    description: Deuterated-acetone D2 operating point (19.3 kHz, 5.0 atm, R0 = 10 um).
+    liquid: acetone_d6_0C
+    gas_mixture:
+      deuterium: 1.0
+    r0: 1.0e-05
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 19300.0
+      amplitudes_init:
+      - 5.0
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+  sbsl_argon_water_fast:
+    description: SBSL argon in water with 1-stage closed-form Saha ladder (R0 = 4.5 um).
+    liquid: water_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 4.5e-06
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 1.35
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    overrides:
+      gas_species.argon.max_ionisation_stages: 1
+  sbsl_argon_water_vapour:
+    description: SBSL argon in water with dynamic H2O vapour mass exchange (R0 = 4.5 um).
+    liquid: water_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 4.5e-06
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 1.35
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    vapour:
+      enabled: true
+    overrides:
+      gas_species.argon.max_ionisation_stages: 1
+  sbsl_argon_unstable:
+    description: High-drive SBSL argon in water at R0 = 7.0 um (active l=2 shape instability).
+    liquid: water_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 7.0e-06
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 1.35
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    overrides:
+      gas_species.argon.max_ionisation_stages: 1
+  sbsl_argon_unstable_r6:
+    description: SBSL argon in water at R0 = 6.0 um.
+    liquid: water_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 6.0e-06
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 1.35
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    overrides:
+      gas_species.argon.max_ionisation_stages: 1
+  sbsl_argon_unstable_r8:
+    description: SBSL argon in water at R0 = 8.0 um.
+    liquid: water_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 8.0e-06
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 1.35
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    overrides:
+      gas_species.argon.max_ionisation_stages: 1
+  sbsl_argon_unstable_r10:
+    description: SBSL argon in water at R0 = 10.0 um.
+    liquid: water_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 1.0e-05
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 1.35
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    overrides:
+      gas_species.argon.max_ionisation_stages: 1
+  sbsl_deuterium_unstable:
+    description: D2 in water at R0 = 7.0 um (26.5 kHz, 1.35 atm).
+    liquid: water_20C
+    gas_mixture:
+      deuterium: 1.0
+    r0: 7.0e-06
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 1.35
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+  sbsl_argon_galinstan:
+    description: Argon in eutectic Galinstan liquid metal at R0 = 7.0 um.
+    liquid: galinstan_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 7.0e-06
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 1.35
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    overrides:
+      gas_species.argon.max_ionisation_stages: 1
+  sbsl_argon_galinstan_r4:
+    description: Argon in Galinstan at R0 = 4.0 um.
+    liquid: galinstan_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 4.0e-06
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 3.0
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    overrides:
+      gas_species.argon.max_ionisation_stages: 1
+  sbsl_argon_galinstan_r10:
+    description: Argon in Galinstan at R0 = 10.0 um.
+    liquid: galinstan_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 1.0e-05
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 3.0
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    overrides:
+      gas_species.argon.max_ionisation_stages: 1
+  sbsl_argon_galinstan_r14:
+    description: Argon in Galinstan at R0 = 14.0 um.
+    liquid: galinstan_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 1.4e-05
+    gas_initial_pressure_mode: laplace
+    gas_initial_pressure: null
+    acoustics:
+      frequency: 26500.0
+      amplitudes_init:
+      - 3.0
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    overrides:
+      gas_species.argon.max_ionisation_stages: 1
+  rayleigh_validation:
+    description: Pure Rayleigh empty-cavity collapse benchmark.
+    liquid: water_20C
+    gas_mixture:
+      argon: 1.0
+    r0: 5.0e-05
+    gas_initial_pressure_mode: explicit
+    gas_initial_pressure: 0.0
+    acoustics:
+      frequency: 0.0
+      amplitudes_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      phases_init:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+    overrides:
+      liquid.surface_tension: 0.0
+      liquid.dynamic_viscosity: 0.0
+      liquid.vapour_pressure: 0.0
+      liquid.sound_speed: 1000000000000.0
+      transport.conduction_enabled: false
+      transport.bremsstrahlung_enabled: false
+      transport.dissociation_enabled: false
+      transport.ionisation_enabled: false
+      fusion.enabled: false
+      shape.enabled: false
+integrator:
+  solver: Tsit5
+  rtol: 1.0e-08
+  atol_r: 1.0e-14
+  atol_rdot: 1.0e-08
+  atol_T: 0.0001
+  atol_a: 1.0e-16
+  atol_adot: 1.0e-10
+  atol_yield: 1.0e-06
+  dt0: 1.0e-12
+  max_steps: 400000
+  pcoeff: 0.3
+  icoeff: 0.4
+  dcoeff: 0.0
+  nondimensionalise: true
